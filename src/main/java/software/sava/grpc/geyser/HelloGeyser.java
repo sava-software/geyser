@@ -3,14 +3,17 @@ package software.sava.grpc.geyser;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.stub.StreamObserver;
+import software.sava.core.accounts.PublicKey;
 import software.sava.core.encoding.Base58;
-import software.sava.grpc.*;
+import software.sava.grpc.geyser.generated.*;
 
+import java.util.Base64;
 import java.util.concurrent.ExecutionException;
 
 public final class HelloGeyser {
 
   public static void main(final String[] args) throws ExecutionException, InterruptedException {
+    final var watchAddress = "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo";
     final var hostPort = "";
     final var channel = Grpc.newChannelBuilder(hostPort, InsecureChannelCredentials.create()).build();
 
@@ -21,9 +24,18 @@ public final class HelloGeyser {
 
     final var stub = GeyserGrpc.newStub(channel);
     final var subscribe = stub.subscribe(new StreamObserver<>() {
+
       @Override
       public void onNext(final SubscribeUpdate tx) {
-        System.out.println(Base58.encode(tx.getTransaction().getTransaction().getSignature().toByteArray()));
+        final var transaction = tx.getTransaction().getTransaction();
+        System.out.println(Base58.encode(transaction.getSignature().toByteArray()));
+        final var message = transaction.getTransaction().getMessage();
+        for (final var ix : message.getInstructionsList()) {
+          final var program = PublicKey.readPubKey(message.getAccountKeys(ix.getProgramIdIndex()).toByteArray());
+          System.out.println(program);
+          final byte[] ixData = ix.getData().toByteArray();
+          System.out.println(Base64.getEncoder().encodeToString(ixData));
+        }
       }
 
       @Override
@@ -41,7 +53,7 @@ public final class HelloGeyser {
         .setCommitment(CommitmentLevel.CONFIRMED)
         .putTransactions("transactions_sub", SubscribeRequestFilterTransactions
             .newBuilder()
-            .addAccountInclude("LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo")
+            .addAccountInclude(watchAddress)
             .build()
         ).build();
     subscribe.onNext(request);

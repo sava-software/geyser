@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 import public "solana-storage.proto";
 
-option java_package = "software.sava.grpc";
+option java_package = "software.sava.grpc.geyser.generated";
 option java_multiple_files = true;
 
 package geyser;

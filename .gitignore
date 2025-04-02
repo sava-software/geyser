@@ -1,6 +1,8 @@
+build/*
+!build/generated
+
 # Gradle files
 .gradle/
-build/
 gradle-app.setting
 !gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.jar
