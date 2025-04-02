@@ -1,0 +1,134 @@
+plugins {
+  id 'com.google.protobuf' version '0.9.4'
+}
+
+ext {
+  VERSION = project.findProperty('version')
+  VCS_URL = 'https://github.com/sava-software/geyser'
+}
+
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+project.group = 'software.sava'
+project.version = "$VERSION"
+
+final JLV = JavaLanguageVersion.of(project.findProperty('javaVersion') as Integer ?: 23)
+final GPR_USER = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+final GPR_TOKEN = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+
+plugins.withType(JavaPlugin).configureEach {
+  java {
+    modularity.inferModulePath = true
+    toolchain {
+      languageVersion = JLV
+    }
+  }
+}
+
+repositories {
+  maven {
+    url = "https://maven.pkg.github.com/sava-software/sava"
+    credentials {
+      username = GPR_USER
+      password = GPR_TOKEN
+    }
+  }
+  mavenCentral()
+}
+
+dependencies {
+  implementation libs.bouncycastle
+  implementation libs.sava.core
+
+  runtimeOnly 'io.grpc:grpc-netty-shaded:1.71.0'
+  implementation 'io.grpc:grpc-protobuf:1.71.0'
+  implementation 'io.grpc:grpc-stub:1.71.0'
+  compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+
+  testImplementation libs.junit.jupiter
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:3.25.5"
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.71.0'
+    }
+  }
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {}
+    }
+  }
+}
+
+test {
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+    exceptionFormat = "full"
+    showStandardStreams = true
+  }
+}
+
+tasks.withType(Javadoc).configureEach {
+  options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+java {
+  withJavadocJar()
+  withSourcesJar()
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+
+      groupId = project.group
+      artifactId = project.name
+      version = project.version
+
+      pom {
+        name = project.name
+        description = "Solana gRPC Geyser Client"
+        url = "$VCS_URL"
+        licenses {
+          license {
+            name = 'Apache-2.0 license'
+            url = 'https://github.com/sava-software/geyser/blob/main/LICENSE'
+          }
+        }
+        developers {
+          developer {
+            name = 'Jim'
+            id = 'jpe7s'
+            email = 'jpe7s.salt188@passfwd.com'
+            organization = 'Sava Software'
+            organizationUrl = 'https://github.com/sava-software'
+          }
+        }
+        scm {
+          connection = 'scm:git:git@github.com:sava-software/geyser.git'
+          developerConnection = 'scm:git:ssh@github.com:sava-software/geyser.git'
+          url = "$VCS_URL"
+        }
+      }
+    }
+  }
+
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/sava-software/geyser"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user.write")
+        password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.token.write")
+      }
+    }
+  }
+}
