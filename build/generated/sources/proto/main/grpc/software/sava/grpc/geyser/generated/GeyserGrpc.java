@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.71.0)",
+    value = "by gRPC proto compiler (version 1.72.0)",
     comments = "Source: geyser.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class GeyserGrpc {

@@ -1,19 +1,21 @@
 plugins {
-  id 'com.google.protobuf' version '0.9.4'
+  alias(libs.plugins.google.protobuf.plugin)
 }
 
 ext {
   VERSION = project.findProperty('version')
   VCS_URL = 'https://github.com/sava-software/geyser'
+  GRPC_VERSION = libs.versions.grpc.get()
+  PROTOC_VERSION = libs.versions.protoc.get()
 }
 
-apply plugin: 'java-library'
-apply plugin: 'maven-publish'
+apply(plugin: 'java-library')
+apply(plugin: 'maven-publish')
 
 project.group = 'software.sava'
 project.version = "$VERSION"
 
-final JLV = JavaLanguageVersion.of(project.findProperty('javaVersion') as Integer ?: 23)
+final JLV = JavaLanguageVersion.of(project.findProperty('javaVersion') as Integer ?: 24)
 final GPR_USER = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
 final GPR_TOKEN = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
 
@@ -41,22 +43,21 @@ dependencies {
   implementation libs.bouncycastle
   implementation libs.sava.core
 
-  runtimeOnly 'io.grpc:grpc-netty-shaded:1.71.0'
-  implementation 'io.grpc:grpc-protobuf:1.71.0'
-  implementation 'io.grpc:grpc-stub:1.71.0'
-  compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+  implementation libs.bundles.grpc.protobuf
 
   testImplementation libs.junit.jupiter
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+// https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 protobuf {
   protoc {
-    artifact = "com.google.protobuf:protoc:3.25.5"
+    // https://mvnrepository.com/artifact/com.google.protobuf/protoc
+    artifact = "com.google.protobuf:protoc:$PROTOC_VERSION"
   }
   plugins {
     grpc {
-      artifact = 'io.grpc:protoc-gen-grpc-java:1.71.0'
+      artifact = "io.grpc:protoc-gen-grpc-java:$GRPC_VERSION"
     }
   }
   generateProtoTasks {
