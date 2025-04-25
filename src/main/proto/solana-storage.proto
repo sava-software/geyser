@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package solana.storage.ConfirmedBlock;
-
 option java_package = "software.sava.grpc.geyser.generated";
 option java_multiple_files = true;
+
+package solana.storage.ConfirmedBlock;
 
 message ConfirmedBlock {
     string previous_blockhash = 1;
