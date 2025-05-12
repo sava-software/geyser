@@ -4,9 +4,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.72.0)",
-    comments = "Source: geyser.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class GeyserGrpc {
 
@@ -44,6 +41,37 @@ public final class GeyserGrpc {
       }
     }
     return getSubscribeMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest,
+      software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse> getSubscribeReplayInfoMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SubscribeReplayInfo",
+      requestType = software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest.class,
+      responseType = software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest,
+      software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse> getSubscribeReplayInfoMethod() {
+    io.grpc.MethodDescriptor<software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest, software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse> getSubscribeReplayInfoMethod;
+    if ((getSubscribeReplayInfoMethod = GeyserGrpc.getSubscribeReplayInfoMethod) == null) {
+      synchronized (GeyserGrpc.class) {
+        if ((getSubscribeReplayInfoMethod = GeyserGrpc.getSubscribeReplayInfoMethod) == null) {
+          GeyserGrpc.getSubscribeReplayInfoMethod = getSubscribeReplayInfoMethod =
+              io.grpc.MethodDescriptor.<software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest, software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SubscribeReplayInfo"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GeyserMethodDescriptorSupplier("SubscribeReplayInfo"))
+              .build();
+        }
+      }
+    }
+    return getSubscribeReplayInfoMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<software.sava.grpc.geyser.generated.PingRequest,
@@ -304,6 +332,13 @@ public final class GeyserGrpc {
 
     /**
      */
+    default void subscribeReplayInfo(software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest request,
+        io.grpc.stub.StreamObserver<software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSubscribeReplayInfoMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void ping(software.sava.grpc.geyser.generated.PingRequest request,
         io.grpc.stub.StreamObserver<software.sava.grpc.geyser.generated.PongResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPingMethod(), responseObserver);
@@ -382,6 +417,14 @@ public final class GeyserGrpc {
 
     /**
      */
+    public void subscribeReplayInfo(software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest request,
+        io.grpc.stub.StreamObserver<software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSubscribeReplayInfoMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void ping(software.sava.grpc.geyser.generated.PingRequest request,
         io.grpc.stub.StreamObserver<software.sava.grpc.geyser.generated.PongResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -456,6 +499,13 @@ public final class GeyserGrpc {
 
     /**
      */
+    public software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse subscribeReplayInfo(software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSubscribeReplayInfoMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public software.sava.grpc.geyser.generated.PongResponse ping(software.sava.grpc.geyser.generated.PingRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPingMethod(), getCallOptions(), request);
@@ -511,6 +561,13 @@ public final class GeyserGrpc {
     protected GeyserBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new GeyserBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse subscribeReplayInfo(software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSubscribeReplayInfoMethod(), getCallOptions(), request);
     }
 
     /**
@@ -574,6 +631,14 @@ public final class GeyserGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse> subscribeReplayInfo(
+        software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSubscribeReplayInfoMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<software.sava.grpc.geyser.generated.PongResponse> ping(
         software.sava.grpc.geyser.generated.PingRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -621,13 +686,14 @@ public final class GeyserGrpc {
     }
   }
 
-  private static final int METHODID_PING = 0;
-  private static final int METHODID_GET_LATEST_BLOCKHASH = 1;
-  private static final int METHODID_GET_BLOCK_HEIGHT = 2;
-  private static final int METHODID_GET_SLOT = 3;
-  private static final int METHODID_IS_BLOCKHASH_VALID = 4;
-  private static final int METHODID_GET_VERSION = 5;
-  private static final int METHODID_SUBSCRIBE = 6;
+  private static final int METHODID_SUBSCRIBE_REPLAY_INFO = 0;
+  private static final int METHODID_PING = 1;
+  private static final int METHODID_GET_LATEST_BLOCKHASH = 2;
+  private static final int METHODID_GET_BLOCK_HEIGHT = 3;
+  private static final int METHODID_GET_SLOT = 4;
+  private static final int METHODID_IS_BLOCKHASH_VALID = 5;
+  private static final int METHODID_GET_VERSION = 6;
+  private static final int METHODID_SUBSCRIBE = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -646,6 +712,10 @@ public final class GeyserGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_SUBSCRIBE_REPLAY_INFO:
+          serviceImpl.subscribeReplayInfo((software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest) request,
+              (io.grpc.stub.StreamObserver<software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse>) responseObserver);
+          break;
         case METHODID_PING:
           serviceImpl.ping((software.sava.grpc.geyser.generated.PingRequest) request,
               (io.grpc.stub.StreamObserver<software.sava.grpc.geyser.generated.PongResponse>) responseObserver);
@@ -698,6 +768,13 @@ public final class GeyserGrpc {
               software.sava.grpc.geyser.generated.SubscribeRequest,
               software.sava.grpc.geyser.generated.SubscribeUpdate>(
                 service, METHODID_SUBSCRIBE)))
+        .addMethod(
+          getSubscribeReplayInfoMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              software.sava.grpc.geyser.generated.SubscribeReplayInfoRequest,
+              software.sava.grpc.geyser.generated.SubscribeReplayInfoResponse>(
+                service, METHODID_SUBSCRIBE_REPLAY_INFO)))
         .addMethod(
           getPingMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -789,6 +866,7 @@ public final class GeyserGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new GeyserFileDescriptorSupplier())
               .addMethod(getSubscribeMethod())
+              .addMethod(getSubscribeReplayInfoMethod())
               .addMethod(getPingMethod())
               .addMethod(getGetLatestBlockhashMethod())
               .addMethod(getGetBlockHeightMethod())

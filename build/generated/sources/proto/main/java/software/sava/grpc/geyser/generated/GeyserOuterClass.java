@@ -171,6 +171,16 @@ public final class GeyserOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_geyser_SubscribeUpdatePong_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_geyser_SubscribeReplayInfoRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_geyser_SubscribeReplayInfoRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_geyser_SubscribeReplayInfoResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_geyser_SubscribeReplayInfoResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_geyser_PingRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -375,45 +385,51 @@ public final class GeyserOuterClass {
       "\001(\014\022\"\n\032executed_transaction_count\030\005 \001(\004\022" +
       "\"\n\032starting_transaction_index\030\006 \001(\004\"\025\n\023S" +
       "ubscribeUpdatePing\"!\n\023SubscribeUpdatePon" +
-      "g\022\n\n\002id\030\001 \001(\005\"\034\n\013PingRequest\022\r\n\005count\030\001 " +
-      "\001(\005\"\035\n\014PongResponse\022\r\n\005count\030\001 \001(\005\"\\\n\031Ge" +
-      "tLatestBlockhashRequest\0220\n\ncommitment\030\001 " +
-      "\001(\0162\027.geyser.CommitmentLevelH\000\210\001\001B\r\n\013_co" +
-      "mmitment\"^\n\032GetLatestBlockhashResponse\022\014" +
-      "\n\004slot\030\001 \001(\004\022\021\n\tblockhash\030\002 \001(\t\022\037\n\027last_" +
-      "valid_block_height\030\003 \001(\004\"X\n\025GetBlockHeig" +
-      "htRequest\0220\n\ncommitment\030\001 \001(\0162\027.geyser.C" +
-      "ommitmentLevelH\000\210\001\001B\r\n\013_commitment\".\n\026Ge" +
-      "tBlockHeightResponse\022\024\n\014block_height\030\001 \001" +
-      "(\004\"Q\n\016GetSlotRequest\0220\n\ncommitment\030\001 \001(\016" +
-      "2\027.geyser.CommitmentLevelH\000\210\001\001B\r\n\013_commi" +
-      "tment\"\037\n\017GetSlotResponse\022\014\n\004slot\030\001 \001(\004\"\023" +
-      "\n\021GetVersionRequest\"%\n\022GetVersionRespons" +
-      "e\022\017\n\007version\030\001 \001(\t\"m\n\027IsBlockhashValidRe" +
-      "quest\022\021\n\tblockhash\030\001 \001(\t\0220\n\ncommitment\030\002" +
-      " \001(\0162\027.geyser.CommitmentLevelH\000\210\001\001B\r\n\013_c" +
-      "ommitment\"7\n\030IsBlockhashValidResponse\022\014\n" +
-      "\004slot\030\001 \001(\004\022\r\n\005valid\030\002 \001(\010*>\n\017Commitment" +
-      "Level\022\r\n\tPROCESSED\020\000\022\r\n\tCONFIRMED\020\001\022\r\n\tF" +
-      "INALIZED\020\002*\241\001\n\nSlotStatus\022\022\n\016SLOT_PROCES" +
-      "SED\020\000\022\022\n\016SLOT_CONFIRMED\020\001\022\022\n\016SLOT_FINALI" +
-      "ZED\020\002\022\035\n\031SLOT_FIRST_SHRED_RECEIVED\020\003\022\022\n\016" +
-      "SLOT_COMPLETED\020\004\022\025\n\021SLOT_CREATED_BANK\020\005\022" +
-      "\r\n\tSLOT_DEAD\020\0062\223\004\n\006Geyser\022D\n\tSubscribe\022\030" +
-      ".geyser.SubscribeRequest\032\027.geyser.Subscr" +
-      "ibeUpdate\"\000(\0010\001\0223\n\004Ping\022\023.geyser.PingReq" +
-      "uest\032\024.geyser.PongResponse\"\000\022]\n\022GetLates" +
-      "tBlockhash\022!.geyser.GetLatestBlockhashRe" +
-      "quest\032\".geyser.GetLatestBlockhashRespons" +
-      "e\"\000\022Q\n\016GetBlockHeight\022\035.geyser.GetBlockH" +
-      "eightRequest\032\036.geyser.GetBlockHeightResp" +
-      "onse\"\000\022<\n\007GetSlot\022\026.geyser.GetSlotReques" +
-      "t\032\027.geyser.GetSlotResponse\"\000\022W\n\020IsBlockh" +
-      "ashValid\022\037.geyser.IsBlockhashValidReques" +
-      "t\032 .geyser.IsBlockhashValidResponse\"\000\022E\n" +
-      "\nGetVersion\022\031.geyser.GetVersionRequest\032\032" +
-      ".geyser.GetVersionResponse\"\000B\'\n#software" +
-      ".sava.grpc.geyser.generatedP\001P\001b\006proto3"
+      "g\022\n\n\002id\030\001 \001(\005\"\034\n\032SubscribeReplayInfoRequ" +
+      "est\"O\n\033SubscribeReplayInfoResponse\022\034\n\017fi" +
+      "rst_available\030\001 \001(\004H\000\210\001\001B\022\n\020_first_avail" +
+      "able\"\034\n\013PingRequest\022\r\n\005count\030\001 \001(\005\"\035\n\014Po" +
+      "ngResponse\022\r\n\005count\030\001 \001(\005\"\\\n\031GetLatestBl" +
+      "ockhashRequest\0220\n\ncommitment\030\001 \001(\0162\027.gey" +
+      "ser.CommitmentLevelH\000\210\001\001B\r\n\013_commitment\"" +
+      "^\n\032GetLatestBlockhashResponse\022\014\n\004slot\030\001 " +
+      "\001(\004\022\021\n\tblockhash\030\002 \001(\t\022\037\n\027last_valid_blo" +
+      "ck_height\030\003 \001(\004\"X\n\025GetBlockHeightRequest" +
+      "\0220\n\ncommitment\030\001 \001(\0162\027.geyser.Commitment" +
+      "LevelH\000\210\001\001B\r\n\013_commitment\".\n\026GetBlockHei" +
+      "ghtResponse\022\024\n\014block_height\030\001 \001(\004\"Q\n\016Get" +
+      "SlotRequest\0220\n\ncommitment\030\001 \001(\0162\027.geyser" +
+      ".CommitmentLevelH\000\210\001\001B\r\n\013_commitment\"\037\n\017" +
+      "GetSlotResponse\022\014\n\004slot\030\001 \001(\004\"\023\n\021GetVers" +
+      "ionRequest\"%\n\022GetVersionResponse\022\017\n\007vers" +
+      "ion\030\001 \001(\t\"m\n\027IsBlockhashValidRequest\022\021\n\t" +
+      "blockhash\030\001 \001(\t\0220\n\ncommitment\030\002 \001(\0162\027.ge" +
+      "yser.CommitmentLevelH\000\210\001\001B\r\n\013_commitment" +
+      "\"7\n\030IsBlockhashValidResponse\022\014\n\004slot\030\001 \001" +
+      "(\004\022\r\n\005valid\030\002 \001(\010*>\n\017CommitmentLevel\022\r\n\t" +
+      "PROCESSED\020\000\022\r\n\tCONFIRMED\020\001\022\r\n\tFINALIZED\020" +
+      "\002*\241\001\n\nSlotStatus\022\022\n\016SLOT_PROCESSED\020\000\022\022\n\016" +
+      "SLOT_CONFIRMED\020\001\022\022\n\016SLOT_FINALIZED\020\002\022\035\n\031" +
+      "SLOT_FIRST_SHRED_RECEIVED\020\003\022\022\n\016SLOT_COMP" +
+      "LETED\020\004\022\025\n\021SLOT_CREATED_BANK\020\005\022\r\n\tSLOT_D" +
+      "EAD\020\0062\365\004\n\006Geyser\022D\n\tSubscribe\022\030.geyser.S" +
+      "ubscribeRequest\032\027.geyser.SubscribeUpdate" +
+      "\"\000(\0010\001\022`\n\023SubscribeReplayInfo\022\".geyser.S" +
+      "ubscribeReplayInfoRequest\032#.geyser.Subsc" +
+      "ribeReplayInfoResponse\"\000\0223\n\004Ping\022\023.geyse" +
+      "r.PingRequest\032\024.geyser.PongResponse\"\000\022]\n" +
+      "\022GetLatestBlockhash\022!.geyser.GetLatestBl" +
+      "ockhashRequest\032\".geyser.GetLatestBlockha" +
+      "shResponse\"\000\022Q\n\016GetBlockHeight\022\035.geyser." +
+      "GetBlockHeightRequest\032\036.geyser.GetBlockH" +
+      "eightResponse\"\000\022<\n\007GetSlot\022\026.geyser.GetS" +
+      "lotRequest\032\027.geyser.GetSlotResponse\"\000\022W\n" +
+      "\020IsBlockhashValid\022\037.geyser.IsBlockhashVa" +
+      "lidRequest\032 .geyser.IsBlockhashValidResp" +
+      "onse\"\000\022E\n\nGetVersion\022\031.geyser.GetVersion" +
+      "Request\032\032.geyser.GetVersionResponse\"\000B\'\n" +
+      "#software.sava.grpc.geyser.generatedP\001P\001" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -607,74 +623,86 @@ public final class GeyserOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_SubscribeUpdatePong_descriptor,
         new java.lang.String[] { "Id", });
-    internal_static_geyser_PingRequest_descriptor =
+    internal_static_geyser_SubscribeReplayInfoRequest_descriptor =
       getDescriptor().getMessageTypes().get(24);
+    internal_static_geyser_SubscribeReplayInfoRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_geyser_SubscribeReplayInfoRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_geyser_SubscribeReplayInfoResponse_descriptor =
+      getDescriptor().getMessageTypes().get(25);
+    internal_static_geyser_SubscribeReplayInfoResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_geyser_SubscribeReplayInfoResponse_descriptor,
+        new java.lang.String[] { "FirstAvailable", });
+    internal_static_geyser_PingRequest_descriptor =
+      getDescriptor().getMessageTypes().get(26);
     internal_static_geyser_PingRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_PingRequest_descriptor,
         new java.lang.String[] { "Count", });
     internal_static_geyser_PongResponse_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_geyser_PongResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_PongResponse_descriptor,
         new java.lang.String[] { "Count", });
     internal_static_geyser_GetLatestBlockhashRequest_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_geyser_GetLatestBlockhashRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetLatestBlockhashRequest_descriptor,
         new java.lang.String[] { "Commitment", });
     internal_static_geyser_GetLatestBlockhashResponse_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_geyser_GetLatestBlockhashResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetLatestBlockhashResponse_descriptor,
         new java.lang.String[] { "Slot", "Blockhash", "LastValidBlockHeight", });
     internal_static_geyser_GetBlockHeightRequest_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_geyser_GetBlockHeightRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetBlockHeightRequest_descriptor,
         new java.lang.String[] { "Commitment", });
     internal_static_geyser_GetBlockHeightResponse_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_geyser_GetBlockHeightResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetBlockHeightResponse_descriptor,
         new java.lang.String[] { "BlockHeight", });
     internal_static_geyser_GetSlotRequest_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_geyser_GetSlotRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetSlotRequest_descriptor,
         new java.lang.String[] { "Commitment", });
     internal_static_geyser_GetSlotResponse_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_geyser_GetSlotResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetSlotResponse_descriptor,
         new java.lang.String[] { "Slot", });
     internal_static_geyser_GetVersionRequest_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(34);
     internal_static_geyser_GetVersionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetVersionRequest_descriptor,
         new java.lang.String[] { });
     internal_static_geyser_GetVersionResponse_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(35);
     internal_static_geyser_GetVersionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_GetVersionResponse_descriptor,
         new java.lang.String[] { "Version", });
     internal_static_geyser_IsBlockhashValidRequest_descriptor =
-      getDescriptor().getMessageTypes().get(34);
+      getDescriptor().getMessageTypes().get(36);
     internal_static_geyser_IsBlockhashValidRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_IsBlockhashValidRequest_descriptor,
         new java.lang.String[] { "Blockhash", "Commitment", });
     internal_static_geyser_IsBlockhashValidResponse_descriptor =
-      getDescriptor().getMessageTypes().get(35);
+      getDescriptor().getMessageTypes().get(37);
     internal_static_geyser_IsBlockhashValidResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_geyser_IsBlockhashValidResponse_descriptor,
