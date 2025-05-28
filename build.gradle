@@ -63,6 +63,7 @@ protobuf {
   generateProtoTasks {
     all()*.plugins {
       grpc {
+        // https://github.com/grpc/grpc-java/issues/9179
         option 'jakarta_omit'
         option '@generated=omit'
       }
