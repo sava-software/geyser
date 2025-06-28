@@ -37,11 +37,11 @@ public final class HelloGeyser {
           final byte[] ixData = ix.getData().toByteArray();
           System.out.println(Base64.getEncoder().encodeToString(ixData));
           if (program.equals(computeBudgetProgram)) {
-            final int discriminator = ixData[0];
+            final int discriminator = ixData[0] & 0xFF;
             switch (cuInstructions[discriminator]) {
               case Unused -> {
               }
-              case RequestHeapFrame -> System.out.println("Heap frame request:" + ByteUtil.getInt32LE(ixData, 1));
+              case RequestHeapFrame -> System.out.println("Heap frame request: " + ByteUtil.getInt32LE(ixData, 1));
               case SetComputeUnitLimit -> System.out.println("Compute unit limit: " + ByteUtil.getInt32LE(ixData, 1));
               case SetComputeUnitPrice -> System.out.println("Compute unit price: " + ByteUtil.getInt64LE(ixData, 1));
               case SetLoadedAccountsDataSizeLimit ->
