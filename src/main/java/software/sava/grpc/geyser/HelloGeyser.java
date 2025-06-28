@@ -30,12 +30,18 @@ public final class HelloGeyser {
       public void onNext(final SubscribeUpdate tx) {
         final var transaction = tx.getTransaction().getTransaction();
         System.out.println(Base58.encode(transaction.getSignature().toByteArray()));
+
         final var message = transaction.getTransaction().getMessage();
+        int i = 0;
         for (final var ix : message.getInstructionsList()) {
           final var program = PublicKey.readPubKey(message.getAccountKeys(ix.getProgramIdIndex()).toByteArray());
-          System.out.println(program);
           final byte[] ixData = ix.getData().toByteArray();
-          System.out.println(Base64.getEncoder().encodeToString(ixData));
+          System.out.printf("""
+                  %d: %s %s
+                  """,
+              i++, program, Base64.getEncoder().encodeToString(ixData)
+          );
+
           if (program.equals(computeBudgetProgram)) {
             final int discriminator = ixData[0] & 0xFF;
             switch (cbInstructions[discriminator]) {
@@ -49,6 +55,7 @@ public final class HelloGeyser {
             }
           }
         }
+        System.out.println();
       }
 
       @Override

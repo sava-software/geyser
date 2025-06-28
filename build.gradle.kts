@@ -1,6 +1,6 @@
 plugins {
-  `java-library`
-  id("com.google.protobuf") version "0.9.5"
+  id("java")
+  alias(libs.plugins.google.protobuf.plugin)
 }
 
 java {
@@ -9,35 +9,24 @@ java {
   }
 }
 
-repositories {
-  mavenCentral()
-}
-
-// https://mvnrepository.com/artifact/com.google.protobuf/protoc
-val protocVersion = "4.31.1"
-val grpcVersion = "1.73.0"
-val savaVersion = "24.19.7"
-val savaProgramsVersion = "24.20.3"
+val savaBOMVersion = providers.gradleProperty("savaBOMVersion").get()
 
 dependencies {
-  implementation("com.google.protobuf:protobuf-java:${protocVersion}")
+  implementation(platform("software.sava:solana-version-catalog:${savaBOMVersion}"))
 
-  implementation("io.grpc:grpc-netty-shaded:${grpcVersion}")
-  implementation("io.grpc:grpc-stub:${grpcVersion}")
-  implementation("io.grpc:grpc-protobuf:${grpcVersion}")
-  implementation("io.grpc:protoc-gen-grpc-java:${grpcVersion}")
+  implementation(libs.bundles.grpc.protobuf)
 
-  implementation("software.sava:sava-core:${savaVersion}")
-  implementation("software.sava:solana-programs:${savaProgramsVersion}")
+  implementation("software.sava:sava-core")
+  implementation("software.sava:solana-programs")
 }
 
 protobuf {
   protoc {
-    artifact = "com.google.protobuf:protoc:${protocVersion}"
+    artifact = "com.google.protobuf:protoc:${libs.versions.protoc.get()}"
   }
   plugins {
     create("grpc") {
-      artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+      artifact = "io.grpc:protoc-gen-grpc-java:${libs.versions.grpc.get()}"
     }
   }
   generateProtoTasks {
