@@ -6,7 +6,7 @@ dependencyResolutionManagement {
   }
   versionCatalogs {
     create("libs") {
-      from("software.sava:solana-version-catalog:${extra["savaBOMVersion"]}")
+      from("software.sava:solana-version-catalog:24.0.16")
     }
   }
 }

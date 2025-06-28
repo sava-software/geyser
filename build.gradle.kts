@@ -9,15 +9,10 @@ java {
   }
 }
 
-val savaBOMVersion = providers.gradleProperty("savaBOMVersion").get()
-
 dependencies {
-  implementation(platform("software.sava:solana-version-catalog:${savaBOMVersion}"))
-
   implementation(libs.bundles.grpc.protobuf)
-
-  implementation("software.sava:sava-core")
-  implementation("software.sava:solana-programs")
+  implementation(libs.sava.core)
+  implementation(libs.sava.solana.programs)
 }
 
 protobuf {
