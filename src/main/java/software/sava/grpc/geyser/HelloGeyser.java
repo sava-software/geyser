@@ -23,7 +23,7 @@ public final class HelloGeyser {
     final var stub = GeyserGrpc.newStub(channel);
     final var solanaAccounts = SolanaAccounts.MAIN_NET;
     final var computeBudgetProgram = solanaAccounts.computeBudgetProgram();
-    final var cuInstructions = ComputeBudgetProgram.Instructions.values();
+    final var cbInstructions = ComputeBudgetProgram.Instructions.values();
     final var subscribe = stub.subscribe(new StreamObserver<>() {
 
       @Override
@@ -38,7 +38,7 @@ public final class HelloGeyser {
           System.out.println(Base64.getEncoder().encodeToString(ixData));
           if (program.equals(computeBudgetProgram)) {
             final int discriminator = ixData[0] & 0xFF;
-            switch (cuInstructions[discriminator]) {
+            switch (cbInstructions[discriminator]) {
               case Unused -> {
               }
               case RequestHeapFrame -> System.out.println("Heap frame request: " + ByteUtil.getInt32LE(ixData, 1));
