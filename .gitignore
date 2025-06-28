@@ -3,6 +3,7 @@ build/*
 
 # Gradle files
 .gradle/
+.kotlin/
 gradle-app.setting
 !gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.jar

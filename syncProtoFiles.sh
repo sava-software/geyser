@@ -23,7 +23,6 @@ insert_option_lines() {
   mv "$temp_file" "$proto_file"
 }
 
-
 cd "$SRC_PROTO_DIRECTORY"
 
 git pull
